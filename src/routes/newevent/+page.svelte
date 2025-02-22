@@ -1,8 +1,19 @@
 <script lang="ts">
+    import LoadingIndicator from '$lib/components/LoadingIndicator.svelte';
+    import { enhance } from '$app/forms';
 
+    let creatingEvent = $state(false);
 </script>
 
-<form method="POST">
+<LoadingIndicator loading={creatingEvent} />
+
+<form method="POST" use:enhance={() => {
+    creatingEvent = true;
+    return async ({ update }) => {
+        await update();
+        creatingEvent = false;
+    };
+}}>
     <!-- form for creating new event -->
     <label for="title">Title</label>
     <input type="text" id="title" name="title" required>
