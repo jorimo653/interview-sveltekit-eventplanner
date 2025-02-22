@@ -18,6 +18,8 @@
             <p>{event.date}</p>
         </div>
     {/each}
+{:catch error}
+    <p>Failed to load events: {error.message}</p>
 {/await}
 
 <a class="btn" href="/newevent" role="button">Add Event</a>
