@@ -2,6 +2,7 @@
     import EventForm from "$lib/components/EventForm.svelte";
     import { enhance } from '$app/forms';
     import type { Event } from "$lib/server/remote-events.js";
+    import LoadingIndicator from "$lib/components/LoadingIndicator.svelte";
 
     let { data } = $props();
     let submitBtnText = 'Save Changes';
@@ -17,9 +18,10 @@
     });
 </script>
 
-{#await data.eventData}
-    <p>Loading...</p>
-{:then eventData} 
+{#if loading}
+    <LoadingIndicator {loading} />
+{:else} 
+    <!-- todo: reintroduce eventform component -->
     <form method="POST" use:enhance={() => {
         loading = true;
         return async ({ update }) => {
@@ -35,4 +37,4 @@
         <input type="datetime-local" id="date" name="date" bind:value={initialFormValues.date} required>
         <button type="submit">{submitBtnText}</button>
     </form>
-{/await}
+{/if}
