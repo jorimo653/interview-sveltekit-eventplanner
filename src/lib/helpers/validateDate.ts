@@ -1,3 +1,3 @@
 export function validateDate(date: string): boolean {
-    return new Date(date) >= new Date();
+  return new Date(date) >= new Date();
 }
