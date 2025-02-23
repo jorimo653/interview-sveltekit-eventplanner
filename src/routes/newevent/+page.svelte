@@ -3,9 +3,14 @@
     import { enhance } from '$app/forms';
 
     let creatingEvent = $state(false);
+    let { form } = $props();
 </script>
 
 <LoadingIndicator loading={creatingEvent} />
+
+{#if form?.error}
+    <p>{form.error}</p>
+{/if}
 
 <form method="POST" use:enhance={() => {
     creatingEvent = true;

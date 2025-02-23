@@ -12,3 +12,5 @@
         <p>{data.event.date}</p>
     {/if}
 </div>
+
+<a href="/" role="button">Back to Home</a>

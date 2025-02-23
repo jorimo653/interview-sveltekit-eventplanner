@@ -4,7 +4,7 @@
     import type { Event } from "$lib/server/remote-events.js";
     import LoadingIndicator from "$lib/components/LoadingIndicator.svelte";
 
-    let { data } = $props();
+    let { data, form } = $props();
     let submitBtnText = 'Save Changes';
     
     let loading = $state(false);
@@ -17,6 +17,10 @@
         });
     });
 </script>
+
+{#if form?.error}
+    <p>{form.error}</p>
+{/if}
 
 {#if loading}
     <LoadingIndicator {loading} />
