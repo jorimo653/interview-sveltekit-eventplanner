@@ -1,5 +1,5 @@
-import { fetchAllEvents } from '$lib/server/remote-events'
+import { fetchAllEvents } from "$lib/server/remote-events";
 
 export function load() {
-    return { events: fetchAllEvents() }
+  return { events: fetchAllEvents() };
 }
