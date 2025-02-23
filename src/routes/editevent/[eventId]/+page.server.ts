@@ -6,7 +6,6 @@ import type { Actions } from '@sveltejs/kit'
 
 export function load({ params }) {
     const eventData = fetchEventById(+params.eventId);
-    console.log({eventData})
     return { eventData };
 }
 

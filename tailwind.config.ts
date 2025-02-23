@@ -10,5 +10,15 @@ export default {
 		extend: {}
 	},
 
-	plugins: [daisyui, typography, forms]
+	plugins: [daisyui, typography, forms],
+	daisyui: {
+		themes: ["light", "dark", "nord"],
+		// darkTheme: "light",
+		base: true,
+		styled: true,
+		utils: true,
+		prefix: "",
+		logs: true,
+		themeRoot: ":root",
+	},
 } satisfies Config;
