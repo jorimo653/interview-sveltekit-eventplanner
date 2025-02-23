@@ -1,7 +1,8 @@
-import { goto } from '$app/navigation';
+import { validateDate } from '$lib/helpers/validateDate.js';
 import { fetchEventById, updateEventById,  } from '$lib/server/remote-events.js';
 import type { Event } from '$lib/server/remote-events.js';
-import type { Actions } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
+import type { Actions } from '@sveltejs/kit'
 
 export function load({ params }) {
     const eventData = fetchEventById(+params.eventId);
@@ -21,12 +22,16 @@ export const actions = {
         if (description) event.description = description;
         if (date) event.date = date;
 
-        const { eventId } = params;
-        if (eventId) {
-            updateEventById(+eventId, event).then(() => {
-                // todo - this doesn't work
-                goto("/");
-            })
+        if (!validateDate(date)) {
+            return fail(422, {
+                description: data.get("date"),
+                error: "Date cannot be in the past.",
+            });
         }
+
+        const { eventId } = params;
+        if (!eventId) error(500);
+        const updatedEvent = await updateEventById(+eventId, event);
+        redirect(303, `/${updatedEvent?.id}`)
     },
 } satisfies Actions;

@@ -1,6 +1,7 @@
+import { validateDate } from "$lib/helpers/validateDate";
 import { createEvent } from "$lib/server/remote-events";
 import type { Actions } from "./$types";
-import { error, redirect } from "@sveltejs/kit";
+import { error, fail, redirect } from "@sveltejs/kit";
 
 export const actions: Actions = {
     default: async ({request}) => {
@@ -10,6 +11,13 @@ export const actions: Actions = {
         const date = formdata.get('date')?.toString();
         if (!title || !date) {
             error(400, 'Title and Date are required');
+        }
+
+        if (!validateDate(date)) {
+            return fail(422, {
+                description: formdata.get("date"),
+                error: "Date cannot be in the past.",
+            });
         }
         const newEvent = await createEvent({title, description, date});
         redirect(303, `/${newEvent.id}`);
