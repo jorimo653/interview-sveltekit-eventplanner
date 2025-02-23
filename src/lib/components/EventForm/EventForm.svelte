@@ -1,6 +1,6 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
-  import LoadingIndicator from "../LoadingIndicator.svelte";
+  import LoadingIndicator from "../LoadingIndicator";
 
   const {
     submitBtnText = "",

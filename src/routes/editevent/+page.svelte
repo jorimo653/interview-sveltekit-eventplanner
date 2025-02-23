@@ -1,5 +1,5 @@
 <script lang="ts">
-  import EventList from "$lib/components/EventList.svelte";
+  import EventList from "$lib/components/EventList";
 
   let { data } = $props();
 </script>

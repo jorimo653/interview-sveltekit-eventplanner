@@ -1,5 +1,5 @@
 <script lang="ts">
-  import EventCard from "./EventCard";
+  import EventCard from "../EventCard";
 
   let { events } = $props();
 </script>
